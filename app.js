@@ -1,5 +1,12 @@
 const restify = require('restify');
 
+app.get(
+  '/*',
+  restify.plugins.serveStatic({
+    directory: path.join(__dirname, 'images'),
+  })
+);
+
 function respond(req, res, next) {
   res.send('Test');
   next();
