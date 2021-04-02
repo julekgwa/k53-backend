@@ -1,0 +1,10 @@
+db:
+  host: localhost
+  username: app_questions
+  passwd: "app2021"
+  database: k53_questions
+  port: 3306
+  connection-limit: 10
+
+log:
+  level: info

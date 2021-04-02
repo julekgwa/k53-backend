@@ -1,0 +1,9 @@
+{
+  "name": "jl-ms-k53",
+  "version": "1.0.0",
+  "description": "K53 backend service",
+  "apidoc": {
+    "title": "K53 Backend service",
+    "url" : ""
+  }
+}
