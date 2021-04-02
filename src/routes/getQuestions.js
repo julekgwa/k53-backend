@@ -1,5 +1,6 @@
 const { getQuestionsService } = require('../service/k53Service');
 const Sentry = require("@sentry/node");
+const { requestErrorHandler } = require('../utils');
 
 module.exports = async function getQuestions(req, res, next) {
 
