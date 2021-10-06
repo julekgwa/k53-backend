@@ -12,8 +12,9 @@
     "mysql2": "^2.2.5"
   },
   "scripts": {
-    "start": "npm run generate-docs && node src/app.js",
-    "dev": "nodemon --ignore 'docs/' src/app.js",
+    "start": "NODE_ENV=production node src/app.js",
+    "docs": "npm run generate-docs && node src/app.js",
+    "dev": "NODE_ENV=development nodemon --ignore 'docs/' src/app.js",
     "generate-docs": "./node_modules/.bin/apidoc -i src/routes/ -o docs"
   },
   "devDependencies": {

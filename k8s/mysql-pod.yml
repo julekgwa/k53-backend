@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jl-ms-mysql
+  labels:
+    project: jl-ms-mysql
+spec:
+  containers:
+    - name: jl-ms-mysql
+      image: mariadb
+      ports:
+        - containerPort: 3306
+          name: mysql
+      env:
+      - name: MARIADB_ROOT_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: passwd
+            name: jl-ms-mysql
+      - name: MYSQL_DATABASE
+        valueFrom:
+          configMapKeyRef:
+            key: database
+            name: jl-ms-mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jl-ms-mysql
+spec:
+  selector:
+    project: jl-ms-mysql
+  ports:
+    - port: 3306
+      targetPort: 3306
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jl-ms-mysql
+data:
+  passwd: cGFzc3dkCg==
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jl-ms-mysql
+data:
+  host: jl-ms-mysql
+  username: root
+  database: k53_questions
+  port: '3306'
+  connection-limit: '10'

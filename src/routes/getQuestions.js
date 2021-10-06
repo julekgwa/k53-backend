@@ -12,7 +12,7 @@ module.exports = async function getQuestions(req, res, next) {
     res.json({ result });
 
   } catch (error) {
-
+console.log(error)
     Sentry.captureException(error);
 
     const { status, data } = requestErrorHandler(error);

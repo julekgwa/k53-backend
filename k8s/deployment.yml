@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jl-ms-k53
+  labels:
+    app: backend
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      project: jl-ms-k53
+  template:
+    metadata:
+      name: jl-ms-k53
+      labels:
+        project: jl-ms-k53
+    spec:
+      containers:
+        - name: jl-ms-k53
+          image: julekgwa/k53
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: host
+                  name: jl-ms-mysql
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: username
+                  name: jl-ms-mysql
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: passwd
+                  name: jl-ms-mysql
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: database
+                  name: jl-ms-mysql
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: jl-ms-mysql
+            - name: POOL_CONNECTION_LIMIT
+              valueFrom:
+                configMapKeyRef:
+                  key: connection-limit
+                  name: jl-ms-mysql
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jl-ms-k53
+spec:
+  selector:
+    project: jl-ms-k53
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30008

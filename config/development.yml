@@ -1,5 +1,7 @@
 db:
-  host: jl-ms-mysql
+  host: 127.0.0.1
+  username: root
+  passwd: passwd
   database: k53_questions
   port: 3306
   connection-limit: 10

@@ -1,8 +1,15 @@
 const express = require('express');
 const Sentry = require("@sentry/node");
 
+const { importTables } = require('./db-setup/index');
 const app = express()
 const port = 8080;
+
+if (process.env.NODE_ENV !== 'development') {
+  console.log('Start import data')
+  importTables().catch(e => console.log(e));
+  console.log('Imported Data');
+};
 
 Sentry.init({ dsn: ""});
 
