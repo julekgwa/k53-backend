@@ -1,7 +1,7 @@
 db:
   host: 127.0.0.1
-  username: root
-  passwd: passwd
+  username: admin
+  passwd: admin@F32
   database: k53_questions
   port: 3306
   connection-limit: 10
